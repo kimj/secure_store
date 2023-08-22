@@ -1,12 +1,20 @@
 package com.example.secure_store
 
-class SecureStore {
-    var masterKey: MasterKey = Builder(context)
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+
+class SecureStore constructor(context: Context){
+
+    var applicationContext : Context = context.applicationContext
+
+    var masterKey: MasterKey = MasterKey.Builder(applicationContext)
         .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
         .build()
 
-    var sharedPreferences: EncryptedSharedPreferences = EncryptedSharedPreferences.create(
-        context,
+    var sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
+        applicationContext,
         "secret_shared_prefs",
         masterKey,
         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
@@ -17,13 +25,12 @@ class SecureStore {
     var editor: SharedPreferences.Editor = sharedPreferences.edit()
 
     fun write(key:String, value: String){
-        val encryption
-        editor.putString(key, encryption.encryptOrNull(value))
+        editor.putString(key, value)
         editor.commit()
 
     }
-    fun read(key:String) : Any {
-        val token: Any = encryption.decryptOrNull(sharedPreferences.getString(key, ""))
+    fun read(key:String) : String? {
+        val token: String? = sharedPreferences.getString(key, "")
         return token
     }
 

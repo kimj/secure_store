@@ -1,6 +1,7 @@
 package com.example.secure_store
 
 import androidx.annotation.NonNull
+import io.flutter.Log
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -15,6 +16,7 @@ class SecureStorePlugin: FlutterPlugin, MethodCallHandler {
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
   private lateinit var channel : MethodChannel
+  val TAG : String = "SECURE_STORE"
 
   private val CHANNEL = "com.example.secure_store/secure_store"
 
@@ -39,8 +41,7 @@ class SecureStorePlugin: FlutterPlugin, MethodCallHandler {
       return;
     }
 
-    Messages.UrlLauncherApi.setup(binding.getBinaryMessenger(), null);
-    channel = null;
+    // Messages.UrlLauncherApi.setup(binding.getBinaryMessenger(), null);
 
     channel.setMethodCallHandler(null)
   }
