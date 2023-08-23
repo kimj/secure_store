@@ -15,23 +15,38 @@ class SecureStorePlugin: FlutterPlugin, MethodCallHandler {
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
-  private lateinit var channel : MethodChannel
+  private var secureStore : SecureStore? = TODO();
+  var channel : MethodChannel? = null
   val TAG : String = "SECURE_STORE"
-
   private val CHANNEL = "com.example.secure_store/secure_store"
 
-  private val secureStore : SecureStore = TODO();
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "secure_store")
-    channel.setMethodCallHandler(this)
+    secureStore = SecureStore(flutterPluginBinding.applicationContext)
+
+    channel = MethodChannel(flutterPluginBinding.binaryMessenger, CHANNEL)
+    channel!!.setMethodCallHandler(this)
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method == "getPlatformVersion") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else {
-      result.notImplemented()
+    when (call.method){
+      "read" -> {
+        val value = secureStore?.read(call.argument<String>("key")!!)
+        result.success(value)
+      }
+      "write" -> {
+        secureStore?.write(call.argument<String>("key")!!, call.argument<String>("value")!!)
+        result.success(null)
+      }
+      "delete" -> {
+        secureStore?.delete(call.argument<String>("key")!!)
+        result.success(null)
+      }
+      "contains" -> {
+        val contains = secureStore?.contains(call.argument<String>("key")!!)
+        result.success(contains)
+      }
+      else -> result.error("", "", "An invalid method call made to SecureStore Plugin.")
     }
   }
 
@@ -41,8 +56,8 @@ class SecureStorePlugin: FlutterPlugin, MethodCallHandler {
       return;
     }
 
-    // Messages.UrlLauncherApi.setup(binding.getBinaryMessenger(), null);
-
-    channel.setMethodCallHandler(null)
+    channel!!.setMethodCallHandler(null)
+    channel = null
+    secureStore = null
   }
 }
