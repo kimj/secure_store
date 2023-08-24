@@ -20,7 +20,6 @@ class SecureStorePlugin: FlutterPlugin, MethodCallHandler {
   val TAG : String = "SECURE_STORE"
   private val CHANNEL = "com.example.secure_store/secure_store"
 
-
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     secureStore = SecureStore(flutterPluginBinding.applicationContext)
 

@@ -23,12 +23,8 @@ abstract class SecureStorePlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
-
-  Future<void> write(String key, String value);
-  Future<String> read(String key);
-  Future<void> contains(String key);
-  Future<void> delete(String key);
+  Future<void> write({required String key, required String value});
+  Future<String> read({required String key});
+  Future<void> contains({required String key});
+  Future<void> delete({required String key});
 }
