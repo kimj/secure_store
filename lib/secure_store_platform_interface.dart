@@ -8,7 +8,7 @@ abstract class SecureStorePlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static SecureStorePlatform _instance = MethodChannelSecureStore();
+  static SecureStorePlatform _instance = SecureStore();
 
   /// The default instance of [SecureStorePlatform] to use.
   ///

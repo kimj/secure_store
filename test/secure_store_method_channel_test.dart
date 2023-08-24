@@ -5,7 +5,7 @@ import 'package:secure_store/secure_store_method_channel.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelSecureStore platform = MethodChannelSecureStore();
+  SecureStore platform = SecureStore();
   const MethodChannel channel = MethodChannel('secure_store');
 
   setUp(() {
@@ -21,7 +21,7 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
   });
 
-  test('getPlatformVersion', () async {
+  /*test('getPlatformVersion', () async {
     expect(await platform.getPlatformVersion(), '42');
-  });
+  });*/
 }

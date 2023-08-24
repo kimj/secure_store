@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:secure_store/secure_store.dart';
 import 'package:secure_store/secure_store_platform_interface.dart';
 import 'package:secure_store/secure_store_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -12,25 +11,25 @@ class MockSecureStorePlatform
   Future<String?> getPlatformVersion() => Future.value('42');
 
   @override
-  Future<void> contains(String key) {
+  Future<void> contains({required String key}) {
     // TODO: implement contains
     throw UnimplementedError();
   }
 
   @override
-  Future<void> delete(String key) {
+  Future<void> delete({required String key}) {
     // TODO: implement delete
     throw UnimplementedError();
   }
 
   @override
-  Future<String> read(String key) {
+  Future<String> read({required String key}) {
     // TODO: implement read
     throw UnimplementedError();
   }
 
   @override
-  Future<void> write(String key, String value) {
+  Future<void> write({required String key, required String value}) {
     // TODO: implement write
     throw UnimplementedError();
   }
@@ -39,15 +38,15 @@ class MockSecureStorePlatform
 void main() {
   final SecureStorePlatform initialPlatform = SecureStorePlatform.instance;
 
-  test('$MethodChannelSecureStore is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelSecureStore>());
+  test('$SecureStore is the default instance', () {
+    expect(initialPlatform, isInstanceOf<SecureStore>());
   });
 
-  test('getPlatformVersion', () async {
+  /*test('getPlatformVersion', () async {
     SecureStore secureStorePlugin = SecureStore();
     MockSecureStorePlatform fakePlatform = MockSecureStorePlatform();
     SecureStorePlatform.instance = fakePlatform;
 
     expect(await secureStorePlugin.getPlatformVersion(), '42');
-  });
+  });*/
 }

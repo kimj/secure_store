@@ -25,25 +25,25 @@ class SecureStoreWeb extends SecureStorePlatform {
   }
 
   @override
-  Future<void> contains(String key) {
+  Future<void> contains({required String key}) {
     // TODO: implement contains
     throw UnimplementedError();
   }
 
   @override
-  Future<void> delete(String key) {
+  Future<void> delete({required String key}) {
     // TODO: implement delete
     throw UnimplementedError();
   }
 
   @override
-  Future<String> read(String key) {
+  Future<String> read({required String key}) {
     // TODO: implement read
     throw UnimplementedError();
   }
 
   @override
-  Future<void> write(String key, String value) {
+  Future<void> write({required String key, required String value}) {
     // TODO: implement write
     throw UnimplementedError();
   }
