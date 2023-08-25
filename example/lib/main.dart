@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:secure_store/secure_store_method_channel.dart';
 
@@ -56,9 +56,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_result\n'),
-        ),
+        body: Text('Secure Store Contents:  $_result\n'),
       ),
     );
   }
