@@ -10,8 +10,12 @@ public class SecureStorePlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
-    case "getPlatformVersion":
+    case "read":
       result("iOS " + UIDevice.current.systemVersion)
+    case "write":
+      let status = SecItemAdd(query as CFDictionary, nil)
+      guard status == errSecSuccess else { throw KeychainError.unhandledError(status: status) }
+
     default:
       result(FlutterMethodNotImplemented)
     }
