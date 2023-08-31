@@ -43,7 +43,7 @@ It is highly recommended to avoid storing secrets in the app as plaintext. Flutt
 
 On the Android the EncryptedSharedPreferences library from AndroidX security is backing the secure_store plugin. This library is compatible with Android 6.0 (API level 23) and above. This plugin has been designed so the user can focus on the data being stored. 
 
-This keystore is backed by hardware encryption on a chip which modern Android phones are equipped with. It is designed to handle most user facing apps on mobile including banking and other enterprise applications. This implementation uses the built in AES256 block cipher encrpytion algorithm to secure data. This algorithm is ideal for data that is smaller which covers most of the cases where the suer is looking to store small bits of data such as a secure base url for http requests, user passwords, access keys, etc... 
+This keystore is backed by hardware encryption on a chip which modern Android phones are equipped with. It is designed to handle most user facing apps on mobile including banking and other enterprise applications. This implementation uses the built in AES256 block cipher encrpytion algorithm to secure data. This algorithm is ideal for data that is smaller which covers most of the cases where the user is looking to store small bits of data such as a secure base url for http requests, user passwords, access keys, etc... 
 
 ### iOS
 
