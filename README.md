@@ -1,6 +1,6 @@
 # secure_store
 
-A new Flutter project.
+A new Flutter plugin for encrypted key-value pair storage.
 
 ## Getting Started
 
