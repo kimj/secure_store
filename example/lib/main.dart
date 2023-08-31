@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
     } on PlatformException {
       result = 'Secure Store Failure';
     }
+
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
 
@@ -53,11 +54,45 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Text('Secure Store Contents:  $_result\n'),
-      ),
+          appBar: AppBar(
+            title: const Text('Secure Store Plugin example app'),
+          ),
+          body: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter a key',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter a value',
+                  ),
+                ),
+              ),
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Row(
+                    children: [
+/*                  OutlinedButton(onPressed: () {
+                    _secureStore.write(key: , value: value)
+                  }, child: Text('Write'),),
+                  OutlinedButton(onPressed: () {  }, child: Text('Read'),),
+                  OutlinedButton(onPressed: () {  }, child: Text('Contains'),),
+                  OutlinedButton(onPressed: () {  }, child: Text('Delete'),),
+                */
+                    ],
+                  )),
+            ],
+          )),
     );
   }
 }
