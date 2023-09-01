@@ -30,12 +30,24 @@ class SecureStorePlugin: FlutterPlugin, MethodCallHandler {
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     when (call.method){
       "read" -> {
-        val value = secureStore?.read(call.argument<String>("key")!!)
-        result.success(value)
+        val key = call.argument<String>("key")!!
+        if(secureStore?.contains(key) == true){
+          val value = secureStore?.read(call.argument<String>("key")!!)
+          result.success(value)
+        }
+        else {
+          result.error("ReadFailure", "SecureStore: Key does not exist in secure_store instance.", null)
+        }
       }
       "write" -> {
-        secureStore?.write(call.argument<String>("key")!!, call.argument<String>("value")!!)
-        result.success(null)
+        val key = call.argument<String>("key")!!
+        val value = call.argument<String>("value")!!
+        if (!secureStore?.contains(key)!!){
+          secureStore?.write(call.argument<String>("key")!!, call.argument<String>("value")!!)
+          result.success(value)
+        } else {
+          result.error("WriteFailure", "SecureStore: Key already exists in secure_store instance.", null)
+        }
       }
       "delete" -> {
         secureStore?.delete(call.argument<String>("key")!!)
@@ -45,7 +57,7 @@ class SecureStorePlugin: FlutterPlugin, MethodCallHandler {
         val contains = secureStore?.contains(call.argument<String>("key")!!)
         result.success(contains)
       }
-      else -> result.error("", "", "An invalid method call made to SecureStore Plugin.")
+      else -> result.error("InvalidMethodCall", "SecureStore: Invalid method call.", "An invalid method call made to SecureStore Plugin.")
     }
   }
 
