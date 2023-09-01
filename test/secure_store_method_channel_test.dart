@@ -56,7 +56,7 @@ void main() {
       await platform.write(key: key, value: value);
 
       var result = await platform.read(key: 'testKey');
-      expect(result, Error());
+      expect(result, 'testValue');
     });
 
     /// ADD tests for making sure error handlign is working correctly
